@@ -6,6 +6,7 @@ class Product
     private $id;
     private $name;
     private $price;
+
     public function getId()
     {
         return $this->id;
@@ -21,24 +22,6 @@ class Product
         return $this->price;
     }
 
-    // public function setName($name)
-    // {
-    //     if (strlen($name) < 2) {
-    //         throw new Exception("Nom trop court.");
-    //     }
-    //     $this->name = $name;
-    //     return $this;
-    // }
-
-    // public function setPrice($price)
-    // {
-    //     if (!is_numeric($price) || $price <= 0) {
-    //         throw new Exception("Prix invalide.");
-    //     }
-    //     $this->price = $price;
-    //     return $this;
-    // }
-
     public static function getList()
     {
         global $dsn, $db_user, $db_pass;
@@ -47,8 +30,13 @@ class Product
         $stmt = $dbh->prepare("SELECT id, name, price FROM product");
 
         $stmt->execute();
-        return $stmt->fetchAll();
+        $products = array();
+        while ($row = $stmt->fetchObject(__CLASS__)) {
+            $products[] = $row;
+        }
+        return $products;
     }
+
 
     public static function get($product_id)
     {
