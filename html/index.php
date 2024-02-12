@@ -6,8 +6,16 @@
 </head>
 
 <body>
-<?php
+    <!-- NAVBAR -->
+    <?php
     require "parts/navbar.php";
+    ?>
+
+    <?php
+    require "parts/forms/login-form.php";
+    ?>
+    <?php
+    require "parts/forms/create-account-form.php";
     ?>
 
     <?php
