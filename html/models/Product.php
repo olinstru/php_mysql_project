@@ -27,7 +27,7 @@ class Product
         global $dsn, $db_user, $db_pass;
         $dbh = new PDO($dsn, $db_user, $db_pass);
 
-        $stmt = $dbh->prepare("SELECT id, name, price FROM product");
+        $stmt = $dbh->prepare("SELECT id, name, price FROM products");
 
         $stmt->execute();
         $products = array();

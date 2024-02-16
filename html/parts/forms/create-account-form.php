@@ -1,4 +1,4 @@
-<form action="create_account.php" method="POST">
+<form action="handlers/create-account-handler.php" method="POST">
     <h2>Create an account</h2>
     <label for="email">E-mail:</label>
     <input type="email" id="email" name="email" required>
