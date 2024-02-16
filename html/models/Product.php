@@ -37,7 +37,6 @@ class Product
         return $products;
     }
 
-
     public static function get($product_id)
     {
         global $dsn, $db_user, $db_pass;

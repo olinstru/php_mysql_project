@@ -71,7 +71,6 @@ class User
         }
     }
 
-
     public static function getByEmail($email)
     {
         global $dsn, $db_user, $db_pass;
@@ -88,7 +87,6 @@ class User
             throw new Exception("User not found with email: $email");
         }
     }
-
 
     public function save()
     {

@@ -20,10 +20,10 @@ try {
         echo 'Error: Incorrect credentials!';
         exit();
     }
-
-    // Todo to show
-    echo 'Login successful.';
-    // header("Location: ../order/index.php");
+    $user_id = User::getByEmail($email);
+    $_SESSION['user_id'] = $user_id;
+    header("Location: ../index.php");
+    exit();
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

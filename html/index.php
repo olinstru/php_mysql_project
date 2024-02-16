@@ -1,3 +1,8 @@
+<?php
+session_start();
+$logged_in = isset($_SESSION['user_id']);
+?>
+
 <html lang="fr">
 
 <head>
@@ -11,16 +16,15 @@
     require "parts/navbar.php";
     ?>
 
-    <?php
-    require "parts/forms/login-form.php";
-    ?>
-    <?php
-    require "parts/forms/create-account-form.php";
-    ?>
+    <?php if (!$logged_in) : ?>
+        <!-- Show login and register forms if user is not logged in -->
+        <?php require "parts/forms/login-form.php"; ?>
+        <?php require "parts/forms/create-account-form.php"; ?>
+    <?php else : ?>
+        <!-- Show product list if user is logged in -->
+        <?php require "parts/product-list.php"; ?>
+    <?php endif; ?>
 
-    <?php
-    require "parts/product-list.php";
-    ?>
 
 </body>
 
