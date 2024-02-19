@@ -6,6 +6,7 @@ class Product
     private $id;
     private $name;
     private $price;
+    private $image_url;
 
     public function getId()
     {
@@ -22,12 +23,17 @@ class Product
         return $this->price;
     }
 
+    public function getImageUrl()
+    {
+        return $this->image_url;
+    }
+
     public static function getList()
     {
         global $dsn, $db_user, $db_pass;
         $dbh = new PDO($dsn, $db_user, $db_pass);
 
-        $stmt = $dbh->prepare("SELECT id, name, price FROM products");
+        $stmt = $dbh->prepare("SELECT id, name, price, image_url FROM products");
 
         $stmt->execute();
         $products = array();

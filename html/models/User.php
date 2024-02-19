@@ -92,7 +92,6 @@ class User
             $user = new User();
             $user->id = $user_data['id'];
             $user->email = $user_data['email'];
-            // Set other properties similarly
             return $user;
         } else {
             throw new Exception("User not found with email: $email");
@@ -106,9 +105,8 @@ class User
 
         try {
             $stmt = $dbh->prepare("INSERT INTO " . self::$TABLE_NAME . " (email, password) VALUES (:email, :password)");
-            $stmt->bindParam(':email', $this->email);
-            $hashedPassword = $this->getHashedPassword();
-            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':email', $this->getEmail());
+            $stmt->bindParam(':password', $this->getHashedPassword());
 
             return $stmt->execute();
         } catch (PDOException $e) {
