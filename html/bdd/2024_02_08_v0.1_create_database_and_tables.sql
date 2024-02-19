@@ -18,6 +18,6 @@ CREATE TABLE `orders` (
   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (product_id) REFERENCES product(id)
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
 );
