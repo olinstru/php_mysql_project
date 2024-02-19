@@ -4,7 +4,9 @@ require_once dirname(__FILE__) . '/../bdd/db.php';
 class User
 {
     static private $TABLE_NAME = 'users';
+    private $id;
     private $email;
+    private $password;
     private $hashedPassword;
 
     public function __construct($email = null, $password = null)
@@ -15,6 +17,11 @@ class User
         if (!empty($password)) {
             $this->setPassword($password);
         }
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function setEmail($newEmail)
@@ -79,9 +86,13 @@ class User
         $stmt = $dbh->prepare("SELECT * FROM " . self::$TABLE_NAME . " WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $user = $stmt->fetchObject('User');
+        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
+        if ($user_data) {
+            $user = new User();
+            $user->id = $user_data['id'];
+            $user->email = $user_data['email'];
+            // Set other properties similarly
             return $user;
         } else {
             throw new Exception("User not found with email: $email");
@@ -96,7 +107,8 @@ class User
         try {
             $stmt = $dbh->prepare("INSERT INTO " . self::$TABLE_NAME . " (email, password) VALUES (:email, :password)");
             $stmt->bindParam(':email', $this->email);
-            $stmt->bindParam(':password', $this->hashedPassword);
+            $hashedPassword = $this->getHashedPassword();
+            $stmt->bindParam(':password', $hashedPassword);
 
             return $stmt->execute();
         } catch (PDOException $e) {

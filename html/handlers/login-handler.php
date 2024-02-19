@@ -22,6 +22,7 @@ try {
     }
     $user_id = User::getByEmail($email);
     $_SESSION['user_id'] = $user_id;
+    $_SESSION['user_email'] = $email;
     header("Location: ../index.php");
     exit();
 } catch (Exception $e) {
