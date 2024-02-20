@@ -8,5 +8,8 @@
             <a class="nav-item nav-link active" href="/">Home</a>
             <a class="nav-item nav-link" href="/orders">Orders</a>
         </div>
+        <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="handlers/logout-handler.php">Logout</a>
+        </div>
     </div>
 </nav>
